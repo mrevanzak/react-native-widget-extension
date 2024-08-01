@@ -58,3 +58,8 @@ android/keystores/debug.keystore
 
 # Expo
 .expo/*
+
+# Build folders
+/build
+**/build
+
