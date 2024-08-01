@@ -1,4 +1,11 @@
-# react-native-widget-extension
+# React Native Widget Extension
+## Getting started
+Run :  
+````sh
+npm install louisp78-react-native-widget-extension
+```
+
+## Configuration and Setup
 
 Expo config plugin to add widgets and live activities to a React Native app
 
