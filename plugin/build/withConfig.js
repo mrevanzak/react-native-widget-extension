@@ -18,9 +18,7 @@ const withConfig = (config, { bundleIdentifier, targetName, appGroup }) => {
                             {
                                 targetName,
                                 bundleIdentifier,
-                                entitlements: {
-                                    [appGroup.entitlementName]: [appGroup.groupName],
-                                },
+                                ...appGroup ? { entitlements: { [appGroup.entitlementName]: [appGroup.groupName] } } : undefined,
                             },
                         ],
                     },

@@ -3,7 +3,7 @@ import { ConfigPlugin } from '@expo/config-plugins';
 export const withConfig: ConfigPlugin<{
   bundleIdentifier: string;
   targetName: string;
-  appGroup: {
+  appGroup?: {
     entitlementName: string;
     groupName: string;
   };
@@ -24,9 +24,7 @@ export const withConfig: ConfigPlugin<{
               {
                 targetName,
                 bundleIdentifier,
-                entitlements: {
-                  [appGroup.entitlementName]: [appGroup.groupName],
-                },
+                ...appGroup ? { entitlements: { [appGroup.entitlementName]: [appGroup.groupName] } } : undefined,
               },
             ],
           },

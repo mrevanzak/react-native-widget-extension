@@ -25,10 +25,12 @@ const withLiveActivities: ConfigPlugin<{
     config.name
   )}Widgets`;
   const bundleIdentifier = `${config.ios?.bundleIdentifier}.${targetName}`;
-  const appGroup = {
+
+  const isAppGroupDefined = config.ios?.entitlements?.['com.apple.security.application-groups'];
+  const appGroup = isAppGroupDefined ? {
     entitlementName: 'com.apple.security.application-groups',
     groupName: `group.${config?.ios?.bundleIdentifier}.widgets`,
-  };
+  } : undefined;
 
   config.ios = {
     ...config.ios,
@@ -53,8 +55,11 @@ const withLiveActivities: ConfigPlugin<{
     ],
     [withPodfile, { targetName }],
     [withConfig, { targetName, bundleIdentifier, appGroup }],
-    [withAppGroup, { appGroup }],
   ]);
+
+  if (appGroup) {
+    config = withPlugins(config, [[withAppGroup, appGroup]]);
+  }
 
   return config;
 };
